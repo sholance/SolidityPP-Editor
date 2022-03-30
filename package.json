@@ -8,7 +8,8 @@
     "start": "budo demo/demo.js:bundle.js --title $npm_package_name --force-default-index --open --live --ssl",
     "build": "browserify --full-paths demo/demo.js > bundle.js",
     "analyse": "discify bundle.js > disc.html",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "npx patch-package"
   },
   "keywords": [
     "embed",

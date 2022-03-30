@@ -1,7 +1,7 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"C:\\Users\\USER\\projects\\bchain\\vite\\play-ed\\demo\\demo.js":[function(require,module,exports){
 const solidityeditor = require('../')
 
-document.title = 'editor-solidity'
+document.title = 'Solidity ++ Editor'
 
 const style = document.createElement('style')
 style.setAttribute('class', 'base')
@@ -71878,7 +71878,7 @@ const colors = require('theme')
 // Styling variables
 
 var css
-var fonts = [ "https://use.fontawesome.com/releases/v5.8.2/css/all.css",
+var fonts = ["https://use.fontawesome.com/releases/v5.8.2/css/all.css",
   'https://fonts.googleapis.com/css?family=Overpass+Mono']
 var fontAwesome = bel`<link href=${fonts[0]} rel='stylesheet' type='text/css'>`
 var overpassMono = bel`<link href=${fonts[1]} rel='stylesheet' type='text/css'>`
@@ -71904,7 +71904,7 @@ async function getProvider() {
       console.log(error)
     }
   } else {
-    window.open("https://metamask.io/")
+    window.open("https://vitex.net/")
   }
   return provider
 }
@@ -71934,9 +71934,9 @@ function displayContractUI(result) {   // compilation result metadata
       },
       sources: { '': result[0].sources.sourcecode }
     }
-}
+  }
   if (!opts || !opts.metadata) {
-    return  bel`
+    return bel`
     <div class=${css.preview}>
       <div class=${css.error}>
         <div class=${css.errorTitle}>error <i class="${css.errorIcon} fa fa-exclamation-circle"></i></div>
@@ -72012,10 +72012,10 @@ function displayContractUI(result) {   // compilation result metadata
       functions: getContractFunctions()
     }
 
-    function sort (functions) {
+    function sort(functions) {
       return functions.filter(x => x.type === 'function').sort((a, b) => {
-        var d=type2num(a) - type2num(b)
-        if (d==0) {
+        var d = type2num(a) - type2num(b)
+        if (d == 0) {
           if (a.name > b.name) return 1;
           if (a.name < b.name) return -1;
         }
@@ -72023,7 +72023,7 @@ function displayContractUI(result) {   // compilation result metadata
       })
     }
 
-    function type2num ({ stateMutability: sm }) {
+    function type2num({ stateMutability: sm }) {
       if (sm === 'view') return 1
       if (sm === 'nonpayable') return 2
       if (sm === 'pure') return 3
@@ -72033,11 +72033,11 @@ function displayContractUI(result) {   // compilation result metadata
 
     var sorted = sort(metadata.functions)
 
-    function generateInputContainer (field) {
-      var theme = { classes: css, colors}
+    function generateInputContainer(field) {
+      var theme = { classes: css, colors }
       var name = field.name
       var type = field.type
-      var inputField = getInputField( {theme, type, cb})
+      var inputField = getInputField({ theme, type, cb })
       var inputContainer = bel`
         <div class=${css.inputContainer}>
           <div class=${css.inputParam} title="data type: ${type}">${name || 'key'}</div>
@@ -72045,7 +72045,7 @@ function displayContractUI(result) {   // compilation result metadata
           <div class=${css.output}></div>
         </div>`
       return inputContainer
-      function cb (msg, el, value) {
+      function cb(msg, el, value) {
         var oldOutput = el.parentNode.querySelector("[class^='output']")
         var output = oldOutput ? oldOutput : output = bel`<div class=${css.output}></div>`
         output.innerHTML = ""
@@ -72054,7 +72054,7 @@ function displayContractUI(result) {   // compilation result metadata
       }
     }
 
-    function getInputField ({ theme, type, cb}) {
+    function getInputField({ theme, type, cb }) {
       var field
       if ((type.search(/\]/) != -1)) {
         var arrayInfo = type.split('[')[1]
@@ -72071,10 +72071,10 @@ function displayContractUI(result) {   // compilation result metadata
       return field
     }
 
-    function functions (fn) {
+    function functions(fn) {
       var label = fn.stateMutability
       var fnName = bel`<a title="${glossary(label)}" class=${css.fnName}><div class=${css.name}>${fn.name}</div></a>`
-      var title = bel`<div class=${css.title} onclick=${e=>toggle(e, null, null)}>${fnName}</div>`
+      var title = bel`<div class=${css.title} onclick=${e => toggle(e, null, null)}>${fnName}</div>`
       var send = bel`<div class=${css.send} onclick=${e => sendTx(fn.name, label, e)}><i class="${css.icon} fa fa-arrow-circle-right"></i></div>`
       var functionClass = css[label]
       var el = bel`
@@ -72087,11 +72087,11 @@ function displayContractUI(result) {   // compilation result metadata
           </ul>
         </div>
       </div>`
-      if (label === 'payable')  send.parentNode.prepend(inputPayable(label))
+      if (label === 'payable') send.parentNode.prepend(inputPayable(label))
       return el
     }
 
-    async function sendTx (fnName, label, e) {
+    async function sendTx(fnName, label, e) {
       var loader = bel`<div class=${css.txReturnItem}>Awaiting network confirmation ${loadingAnimation(colors)}</div>`
       var container = e.target.parentNode.parentNode.parentNode.parentNode
       var txReturn = container.querySelector("[class^='txReturn']") || bel`<div class=${css.txReturn}></div>`
@@ -72109,7 +72109,7 @@ function displayContractUI(result) {   // compilation result metadata
           fnName
         }
         if (contractType === 'transaction') {
-          const callableTx = await makeContractCallable (contract, fnName, provider, args, allArgs)
+          const callableTx = await makeContractCallable(contract, fnName, provider, args, allArgs)
           opts.tx = callableTx
           opts.typeTransaction = true
           try {
@@ -72129,11 +72129,11 @@ function displayContractUI(result) {   // compilation result metadata
       } else {
         let deploy = document.querySelector("[class^='deploy']")
         deploy.classList.add(css.bounce)
-        setTimeout(()=>deploy.classList.remove(css.bounce), 3500)
+        setTimeout(() => deploy.classList.remove(css.bounce), 3500)
       }
     }
 
-    async function executeTx (contract, fnName, provider, args, allArgs, opts) {
+    async function executeTx(contract, fnName, provider, args, allArgs, opts) {
       try {
         let contractAsCurrentSigner = contract.connect(signer)
         var tx
@@ -72143,7 +72143,7 @@ function displayContractUI(result) {   // compilation result metadata
       } catch (e) { txReturn.children.length > 1 ? txReturn.removeChild(loader) : container.removeChild(txReturn) }
     }
 
-    async function makeContractCallable (contract, fnName, provider, args, allArgs) {
+    async function makeContractCallable(contract, fnName, provider, args, allArgs) {
       const fn = contract.interface.functions[fnName]
       if (fn.outputs.length > 0) {
         const signature = fn.signature
@@ -72155,14 +72155,14 @@ function displayContractUI(result) {   // compilation result metadata
         let signer = await provider.getSigner()
         const callableAsCurrentSigner = await contractCallable.connect(signer)
         try {
-          const callableFn =callableAsCurrentSigner.functions[fnName]
+          const callableFn = callableAsCurrentSigner.functions[fnName]
           return await callableFn(...args)
         } catch (e) { console.log(e) }
       } else return []
     }
 
 
-    function toggleAll (e) {
+    function toggleAll(e) {
       var fnContainer = e.currentTarget.parentElement.parentElement.children[2]
       var constructorToggle = e.currentTarget.children[0]
       var constructorIcon = constructorToggle.children[0]
@@ -72178,10 +72178,10 @@ function displayContractUI(result) {   // compilation result metadata
       }
     }
 
-    function toggle (e, fun, constructorIcon) {
+    function toggle(e, fun, constructorIcon) {
       var fn
       var toggleContainer
-      function removeLogs (el) {
+      function removeLogs(el) {
         var txReturn = el.parentNode.querySelectorAll("[class^='txReturn']")[0]
         if (txReturn) {
           txReturn.classList.remove(css.visible)
@@ -72189,7 +72189,7 @@ function displayContractUI(result) {   // compilation result metadata
           txReturn.style.minHeight = 0
         }
       }
-      function addLogs (el) {
+      function addLogs(el) {
         var txReturn = el.parentNode.querySelectorAll("[class^='txReturn']")[0]
         if (txReturn) {
           txReturn.classList.remove(css.hidden)
@@ -72213,7 +72213,7 @@ function displayContractUI(result) {   // compilation result metadata
           fnInputs.classList.add(css.visible)
           addLogs(fn)
         }
-      // TOGGLE triggered with onclick on function title (toggle single function)
+        // TOGGLE triggered with onclick on function title (toggle single function)
       } else {
         fn = e.currentTarget.parentNode
         toggleContainer = e.currentTarget.children[1]
@@ -72235,11 +72235,11 @@ function displayContractUI(result) {   // compilation result metadata
       }
     }
 
-// Create and deploy contract using WEB3
+    // Create and deploy contract using WEB3
     async function deployContract() {
       let abi = solcMetadata.output.abi
       let bytecode = opts.metadata.bytecode
-      provider =  await getProvider()
+      provider = await getProvider()
       let signer = await provider.getSigner()
       var el = document.querySelector("[class^='ctor']")
       let factory = await new ethers.ContractFactory(abi, bytecode, signer)
@@ -72262,7 +72262,7 @@ function displayContractUI(result) {   // compilation result metadata
       }
     }
 
-    function activateConnect (e) {
+    function activateConnect(e) {
       if (active != e.target) {
         setToActive(e.target)
         topContainer.removeChild(ctor)
@@ -72270,7 +72270,7 @@ function displayContractUI(result) {   // compilation result metadata
       }
     }
 
-    function activatePublish (e) {
+    function activatePublish(e) {
       if (active != e.target) {
         setToActive(e.target)
         topContainer.removeChild(connectContainer)
@@ -72278,10 +72278,10 @@ function displayContractUI(result) {   // compilation result metadata
       }
     }
 
-    async function connectToContract () {
+    async function connectToContract() {
       let abi = solcMetadata.output.abi
       let bytecode = opts.metadata.bytecode
-      provider =  await getProvider()
+      provider = await getProvider()
       let signer = await provider.getSigner()
       var el = document.querySelector("[class^='connectContainer']")
       var allArgs = getArgs(el, 'inputContainer')
@@ -72308,7 +72308,7 @@ function displayContractUI(result) {   // compilation result metadata
       }
     }
 
-    function setToActive (e) {
+    function setToActive(e) {
       e.classList.add(css.activetab)
       active.classList.remove(css.activetab)
       active = e
@@ -72316,10 +72316,10 @@ function displayContractUI(result) {   // compilation result metadata
 
     function activateSendTx(instance) {
       let sendButtons = document.querySelectorAll("[class^='send']")
-      for(var i = 0;i < sendButtons.length;i++) {
+      for (var i = 0; i < sendButtons.length; i++) {
         sendButtons[i].style.color = colors.slateGrey
       }
-      for(var i = 0;i < sendButtons.length;i++) {
+      for (var i = 0; i < sendButtons.length; i++) {
         sendButtons[i].style.color = colors.whiteSmoke
       }
     }
@@ -72327,15 +72327,24 @@ function displayContractUI(result) {   // compilation result metadata
     var topContainer = bel`<div class=${css.topContainer}></div>`
     var ctor = bel`<div class="${css.ctor}">
       ${metadata.constructorInput}
-      <div class=${css.deploy} onclick=${()=>deployContract()}
+      <div class=${css.deploy} onclick=${() => deployContract()}
         title="Publish the contract first (this executes the Constructor function). After that you will be able to start sending/receiving data using the contract functions below.">
-        <div class=${css.deployTitle}>Publish</div>
+        <div class=${css.deployTitle}>Publish to MetaMast</div>
         <i class="${css.icon} fa fa-arrow-circle-right"></i>
       </div>
     </div>`
+    const vctor = bel`
+    ${metadata.constructorInput}
+    <div class=${css.deploy} onclick=${() => deployViteContract()}
+      title="Publish the contract first (this executes the Constructor function). After that you will be able to start sending/receiving data using the contract functions below.">
+      <div class=${css.deployTitle}>Publish to ViteX</div>
+      <i class="${css.icon} fa fa-arrow-circle-right"></i>
+    </div>
+  </div>
+    `
     const connectContainer = bel`<div class="${css.connectContainer}">
-      ${generateInputContainer({name: 'contract_address', type:'address'})}
-      <div class=${css.connect} onclick=${()=>connectToContract()}
+      ${generateInputContainer({ name: 'contract_address', type: 'address' })}
+      <div class=${css.connect} onclick=${() => connectToContract()}
         title="Enter address of the deployed contract you want to connect with. Select the correct network and click Connect. After that you will be able to interact with the chosen contract.">
         <div class=${css.connectTitle}>Connect</div>
         <i class="${css.icon} fa fa-arrow-circle-right"></i>
@@ -72343,9 +72352,9 @@ function displayContractUI(result) {   // compilation result metadata
     </div>`
     var active, tabs = bel`<div class=${css.tabsContainer}>
       ${active = bel`<div class="${css.tab} ${css.activetab}"
-      onclick=${e=>activatePublish(e)}>Publish</div>`}
+      onclick=${e => activatePublish(e)}>Publish</div>`}
       <div class="${css.tab}"
-      onclick=${e=>activateConnect(e)}>Connect</div>
+      onclick=${e => activateConnect(e)}>Connect</div>
     </div>`
     topContainer.appendChild(tabs)
     topContainer.appendChild(ctor)
@@ -72353,13 +72362,13 @@ function displayContractUI(result) {   // compilation result metadata
     return bel`
     <div class=${css.preview}>
       <div class=${css.constructorFn}>
-        <div class=${css.contractName} onclick=${e=>toggleAll(e)} title="Expand to see the details">
+        <div class=${css.contractName} onclick=${e => toggleAll(e)} title="Expand to see the details">
           ${metadata.constructorName}
           <span class=${css.icon}><i class="fa fa-minus-circle" title="Expand to see the details"></i></span>
         </div>
       </div>
       ${topContainer}
-      <div class=${css.functions}>${sorted.map(fn => { return functions(fn)})}</div>
+      <div class=${css.functions}>${sorted.map(fn => { return functions(fn) })}</div>
     </div>`
   }
 }
@@ -72813,7 +72822,7 @@ function inputStyle() {
   `
 }
 
-function hover () {
+function hover() {
   return `
     cursor: pointer;
     opacity: 0.6;
@@ -76574,7 +76583,8 @@ var list, requestID
 ;(async () => {
   list = localStorage['list']
   if (!list) {
-    list = await fetch('https://solc-bin.ethereum.org/bin/list.json').then(x => x.text())
+    list = await
+      fetch('https://solc-bin.ethereum.org/bin/list.json' && '').then(x => x.text())
     localStorage['list'] = list
   }
 })()
