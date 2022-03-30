@@ -65,7 +65,7 @@ const darktheme = {
   color_seperator: dark,
 }
 
-// module.exports = lighttheme
+//module.exports = lighttheme
 module.exports = darktheme
 
 // // ----- CODESANDBOX

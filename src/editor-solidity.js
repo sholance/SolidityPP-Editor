@@ -97,31 +97,28 @@ function playeditor (opts = {}, theme = defaultTheme) {
   const id = `/editor/${Object.keys(editors).length}`
   const code = localStorage['source'] || `
 /*
-You can use Play editor with any contract.
+You can use Play editor with any vite or solidity contract.
+
 Paste it in the editor and wait for the preview to start interacting with it.
 
-**To interact with the contract you will need a Metamask extension.
+(Not fully developed) Please use with caution
+
+**To interact with the contract you will need a vite wallet.
 */
 
 
 pragma solidity 0.5.12;
 
-contract SimpleStorage {
+contract HelloWorld {
+  uint public data = 123;
 
-    uint8 storedData;
-
-    function set(uint8 x) public {
-        storedData = x;
-    }
-
-    function get() public view returns (uint8) {
-        return storedData;
-    }
-
+  function set(uint a) external {
+      data = a; 
+  }
 }
 `
   const ed = {
-    name: opts.name || 'contract.sol',
+    name: opts.name || 'contract.solpp',
     el: codingeditor({
       value: opts.value || code,
       lineNumbers: true,

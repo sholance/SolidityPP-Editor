@@ -18,7 +18,7 @@ document.head.appendChild(style)
 // }
 // var boxes = [...Array(4)].map(makeBox)
 // boxes.forEach(el => document.body.appendChild(el))
-;[solidityeditor({ name: 'contract.sol' }),
+  ;[solidityeditor({ name: 'contract.solpp' }),
 // solidityeditor({ value: contract() }, {
 //   color1: 'red',
 //   color2: 'green',
