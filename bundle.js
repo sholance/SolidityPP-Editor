@@ -71896,10 +71896,7 @@ var contract
 async function getProvider() {
   if (window.web3 && window.web3.currentProvider) {
     try {
-      // Acccounts now exposed
-      provider = new ethers.providers.Web3Provider(window.web3.currentProvider)
-      // Request account access if needed
-      await ethereum.enable();
+      window.open("https://vitex.net/")
     } catch (error) {
       console.log(error)
     }
@@ -72266,6 +72263,7 @@ function displayContractUI(result) {   // compilation result metadata
       if (active != e.target) {
         setToActive(e.target)
         topContainer.removeChild(ctor)
+        topContainer.removeChild(vctor)
         topContainer.appendChild(connectContainer)
       }
     }
@@ -72275,9 +72273,12 @@ function displayContractUI(result) {   // compilation result metadata
         setToActive(e.target)
         topContainer.removeChild(connectContainer)
         topContainer.appendChild(ctor)
+        topContainer.appendChild(vctor)
       }
     }
+    async function deployViteContract() {
 
+    }
     async function connectToContract() {
       let abi = solcMetadata.output.abi
       let bytecode = opts.metadata.bytecode
@@ -72292,7 +72293,7 @@ function displayContractUI(result) {   // compilation result metadata
       try {
         contract = new ethers.Contract(address, abi, provider)
         var code = await provider.getCode(address)
-        if (!code || code === '0x') {
+        if (!code || code === '0x' || code === 'vi') {
           let loader = document.querySelector("[class^='connecting']")
           loader.replaceWith(connectContainer)
           console.log('Not a valid contract address')
@@ -72333,15 +72334,13 @@ function displayContractUI(result) {   // compilation result metadata
         <i class="${css.icon} fa fa-arrow-circle-right"></i>
       </div>
     </div>`
-    const vctor = bel`
-    ${metadata.constructorInput}
-    <div class=${css.deploy} onclick=${() => deployViteContract()}
+    var vctor = bel`<div class="${css.vctor}">
+    <div class=${css.deployVite} onclick=${() => deployViteContract()}
       title="Publish the contract first (this executes the Constructor function). After that you will be able to start sending/receiving data using the contract functions below.">
-      <div class=${css.deployTitle}>Publish to ViteX</div>
+      <div class=${css.deployViteTitle}>Publish to Vite</div>
       <i class="${css.icon} fa fa-arrow-circle-right"></i>
     </div>
-  </div>
-    `
+  </div>`
     const connectContainer = bel`<div class="${css.connectContainer}">
       ${generateInputContainer({ name: 'contract_address', type: 'address' })}
       <div class=${css.connect} onclick=${() => connectToContract()}
@@ -72358,6 +72357,7 @@ function displayContractUI(result) {   // compilation result metadata
     </div>`
     topContainer.appendChild(tabs)
     topContainer.appendChild(ctor)
+    topContainer.appendChild(vctor)
 
     return bel`
     <div class=${css.preview}>
@@ -72512,6 +72512,12 @@ css = csjs`
       padding: 0 5px 0 0;
       font-weight: 800;
     }
+    .deployViteTitle {
+      font-size: 1.3rem;
+      background-color: ${colors.dark};
+      padding: 0 5px 0 0;
+      font-weight: 800;
+    }
     .deploy, .connect {
       color: ${colors.whiteSmoke};
       display: flex;
@@ -72525,6 +72531,17 @@ css = csjs`
     }
     .deploy:hover, .connect:hover {
       ${hover()}
+    }
+    .deployVite {
+      color: ${colors.whiteSmoke};
+      display: flex;
+      align-items: center;
+      bottom: -50px;
+      right: -12px;
+      font-size: 1.8rem;
+      position: absolute;
+      background-color: ${colors.dark};
+      cursor: pointer;
     }
     .send {
       display: flex;
@@ -72631,6 +72648,7 @@ css = csjs`
       color: ${colors.whiteSmoke};
     }
     .ctor {}
+    .vctor {}
     .connectContainer {}
     .signature {}
     .pure {
@@ -76666,9 +76684,9 @@ You can use Play editor with any vite or solidity contract.
 
 Paste it in the editor and wait for the preview to start interacting with it.
 
-(Not fully developed) Please use with caution
+(Not fully developed__ )
 
-**To interact with the contract you will need a vite wallet.
+**To interact with the contract you will need a vite wallet or metamask for solidity contract.
 */
 
 

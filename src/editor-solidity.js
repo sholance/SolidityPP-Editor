@@ -102,7 +102,7 @@ You can use Play editor with any vite or solidity contract.
 
 Paste it in the editor and wait for the preview to start interacting with it.
 
-(Not fully developed__ ) Please use with caution
+(Not fully developed__ )
 
 **To interact with the contract you will need a vite wallet or metamask for solidity contract.
 */
