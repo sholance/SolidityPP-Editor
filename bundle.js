@@ -72338,7 +72338,7 @@ function displayContractUI(result) {   // compilation result metadata
       </div>
     </div>`
     var vctor = bel`<div class="${css.vctor}">
-    <div class=${css.deployVite} onclick=${() => deployViteContract()}
+    <div class=${css.deployVite} onclick=${() => deployViteContract()} >
       <div class=${css.deployViteTitle}>Publish to Vite</div>
       <i class="${css.icon} fa fa-arrow-circle-right"></i>
     </div>

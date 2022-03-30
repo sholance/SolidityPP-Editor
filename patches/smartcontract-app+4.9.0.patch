@@ -1,5 +1,5 @@
 diff --git a/node_modules/smartcontract-app/src/smartcontract-app.js b/node_modules/smartcontract-app/src/smartcontract-app.js
-index fd85955..1a142fa 100644
+index fd85955..50b7d36 100644
 --- a/node_modules/smartcontract-app/src/smartcontract-app.js
 +++ b/node_modules/smartcontract-app/src/smartcontract-app.js
 @@ -24,7 +24,7 @@ const colors = require('theme')
@@ -275,7 +275,7 @@ index fd85955..1a142fa 100644
          sendButtons[i].style.color = colors.whiteSmoke
        }
      }
-@@ -473,15 +477,22 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -473,15 +477,21 @@ function displayContractUI(result) {   // compilation result metadata
      var topContainer = bel`<div class=${css.topContainer}></div>`
      var ctor = bel`<div class="${css.ctor}">
        ${metadata.constructorInput}
@@ -288,8 +288,7 @@ index fd85955..1a142fa 100644
        </div>
      </div>`
 +    var vctor = bel`<div class="${css.vctor}">
-+    <div class=${css.deployVite} onclick=${() => deployViteContract()}
-+      title="Publish the contract first (this executes the Constructor function). After that you will be able to start sending/receiving data using the contract functions below.">
++    <div class=${css.deployVite} onclick=${() => deployViteContract()} >
 +      <div class=${css.deployViteTitle}>Publish to Vite</div>
 +      <i class="${css.icon} fa fa-arrow-circle-right"></i>
 +    </div>
@@ -302,7 +301,7 @@ index fd85955..1a142fa 100644
          title="Enter address of the deployed contract you want to connect with. Select the correct network and click Connect. After that you will be able to interact with the chosen contract.">
          <div class=${css.connectTitle}>Connect</div>
          <i class="${css.icon} fa fa-arrow-circle-right"></i>
-@@ -489,23 +500,24 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -489,23 +499,24 @@ function displayContractUI(result) {   // compilation result metadata
      </div>`
      var active, tabs = bel`<div class=${css.tabsContainer}>
        ${active = bel`<div class="${css.tab} ${css.activetab}"
@@ -331,7 +330,7 @@ index fd85955..1a142fa 100644
      </div>`
    }
  }
-@@ -649,6 +661,12 @@ css = csjs`
+@@ -649,6 +660,12 @@ css = csjs`
        padding: 0 5px 0 0;
        font-weight: 800;
      }
@@ -344,7 +343,7 @@ index fd85955..1a142fa 100644
      .deploy, .connect {
        color: ${colors.whiteSmoke};
        display: flex;
-@@ -663,6 +681,17 @@ css = csjs`
+@@ -663,6 +680,17 @@ css = csjs`
      .deploy:hover, .connect:hover {
        ${hover()}
      }
@@ -362,7 +361,7 @@ index fd85955..1a142fa 100644
      .send {
        display: flex;
        align-items: baseline;
-@@ -768,6 +797,7 @@ css = csjs`
+@@ -768,6 +796,7 @@ css = csjs`
        color: ${colors.whiteSmoke};
      }
      .ctor {}
@@ -370,7 +369,7 @@ index fd85955..1a142fa 100644
      .connectContainer {}
      .signature {}
      .pure {
-@@ -959,7 +989,7 @@ function inputStyle() {
+@@ -959,7 +988,7 @@ function inputStyle() {
    `
  }
  
