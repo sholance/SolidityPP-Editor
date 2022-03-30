@@ -76648,14 +76648,15 @@ window.addEventListener('message', event => {
 
 module.exports = playeditor
 
-function playeditor(opts = {}, theme = lighttheme) {
+function playeditor (opts = {}, theme = defaultTheme) {
   const id = `/editor/${Object.keys(editors).length}`
   const code = localStorage['source'] || `
 /*
-You can use Play editor with any contract.
+You can use Play editor with any vite or solidity contract.
 
 Paste it in the editor and wait for the preview to start interacting with it.
-(Not fully developed) Please only use for testing lol
+
+(Not fully developed) Please use with caution
 
 **To interact with the contract you will need a vite wallet.
 */
@@ -76663,22 +76664,16 @@ Paste it in the editor and wait for the preview to start interacting with it.
 
 pragma solidity 0.5.12;
 
-contract SimpleStorage {
+contract HelloWorld {
+  uint public data = 123;
 
-    uint8 storedData;
-
-    function set(uint8 x) public {
-        storedData = x;
-    }
-
-    function get() public view returns (uint8) {
-        return storedData;
-    }
-
+  function set(uint a) external {
+      data = a; 
+  }
 }
 `
   const ed = {
-    name: opts.name || 'contract.sol',
+    name: opts.name || 'contract.solpp',
     el: codingeditor({
       value: opts.value || code,
       lineNumbers: true,
@@ -76845,8 +76840,9 @@ function debounce (fn) {
 module.exports = getCompilerVersion
 
 function getCompilerVersion (releases, code) {
-  var regex = /\s*pragma\s*solidity\s*([><=\^]*)\s*(\d+\.\d+\.\d+)?\s*([><=\^]*)\s*(\d+\.\d+\.\d+)?;/
-  const result = code.match(regex) || []
+  var regex1 = /\s*pragma\s*solidity\s*([><=\^]*)\s*(\d+\.\d+\.\d+)?\s*([><=\^]*)\s*(\d+\.\d+\.\d+)?;/
+  var regex2 = /\s*pragma\s*solidity\s*([><=++\^]*)\s*(\d+\.\d+\.\d+)?\s*([><=\^]*)\s*(\d+\.\d+\.\d+)?;/
+  const result = code.match(regex1 || regex2) || []
   var [ pragma,op1, min, op2, max] = result
   if (pragma) {
     if (max) {
@@ -76915,7 +76911,7 @@ function menubar ({ items = [], theme = {} }, emit) {
         }}>${title}</button>
       `)}
       </div>
-      <div class=${css.chatLink} onclick=${() => window.open('https://vitex.net/', '_blank')}>VITE LABS</div>
+      <div class=${css.chatLink} onclick=${() => window.open('https://vitex.net/', '_blank')}>GET VITE WALLET</div>
       <div class=${css.logo} onclick=${() => window.open('https://vitex.net/', '_blank')}>
         <img src="./assets/logo.png" alt="logo">
       </div>
@@ -77051,7 +77047,7 @@ const darktheme = {
   color_seperator: dark,
 }
 
-// module.exports = lighttheme
+//module.exports = lighttheme
 module.exports = darktheme
 
 // // ----- CODESANDBOX

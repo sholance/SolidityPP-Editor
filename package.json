@@ -5,7 +5,6 @@
   "description": "solidity ++ editor",
   "main": "src/editor-solidity.js",
   "scripts": {
-    "postinstall": "patch-package",
     "start": "budo demo/demo.js:bundle.js --title $npm_package_name --force-default-index --open --live --ssl",
     "build": "browserify --full-paths demo/demo.js > bundle.js",
     "analyse": "discify bundle.js > disc.html",
