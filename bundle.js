@@ -71896,7 +71896,10 @@ var contract
 async function getProvider() {
   if (window.web3 && window.web3.currentProvider) {
     try {
-      window.open("https://vitex.net/")
+      // Acccounts now exposed
+      provider = new ethers.providers.Web3Provider(window.web3.currentProvider)
+      // Request account access if needed
+      await ethereum.enable();
     } catch (error) {
       console.log(error)
     }
@@ -72330,13 +72333,12 @@ function displayContractUI(result) {   // compilation result metadata
       ${metadata.constructorInput}
       <div class=${css.deploy} onclick=${() => deployContract()}
         title="Publish the contract first (this executes the Constructor function). After that you will be able to start sending/receiving data using the contract functions below.">
-        <div class=${css.deployTitle}>Publish to MetaMast</div>
+        <div class=${css.deployTitle}>Publish to MetaMask</div>
         <i class="${css.icon} fa fa-arrow-circle-right"></i>
       </div>
     </div>`
     var vctor = bel`<div class="${css.vctor}">
     <div class=${css.deployVite} onclick=${() => deployViteContract()}
-      title="Publish the contract first (this executes the Constructor function). After that you will be able to start sending/receiving data using the contract functions below.">
       <div class=${css.deployViteTitle}>Publish to Vite</div>
       <i class="${css.icon} fa fa-arrow-circle-right"></i>
     </div>
@@ -76680,7 +76682,7 @@ function playeditor (opts = {}, theme = defaultTheme) {
   const id = `/editor/${Object.keys(editors).length}`
   const code = localStorage['source'] || `
 /*
-You can use Play editor with any vite or solidity contract.
+You can use Play editor with solidity contract or any vite smart contract (still under development).
 
 Paste it in the editor and wait for the preview to start interacting with it.
 

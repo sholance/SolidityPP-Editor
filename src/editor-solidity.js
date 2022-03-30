@@ -98,7 +98,7 @@ function playeditor (opts = {}, theme = defaultTheme) {
   const id = `/editor/${Object.keys(editors).length}`
   const code = localStorage['source'] || `
 /*
-You can use Play editor with any vite or solidity contract.
+You can use Play editor with solidity contract or any vite smart contract (still under development).
 
 Paste it in the editor and wait for the preview to start interacting with it.
 

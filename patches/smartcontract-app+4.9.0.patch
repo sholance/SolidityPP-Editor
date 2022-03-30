@@ -1,5 +1,5 @@
 diff --git a/node_modules/smartcontract-app/src/smartcontract-app.js b/node_modules/smartcontract-app/src/smartcontract-app.js
-index fd85955..26f8eda 100644
+index fd85955..1a142fa 100644
 --- a/node_modules/smartcontract-app/src/smartcontract-app.js
 +++ b/node_modules/smartcontract-app/src/smartcontract-app.js
 @@ -24,7 +24,7 @@ const colors = require('theme')
@@ -11,16 +11,7 @@ index fd85955..26f8eda 100644
    'https://fonts.googleapis.com/css?family=Overpass+Mono']
  var fontAwesome = bel`<link href=${fonts[0]} rel='stylesheet' type='text/css'>`
  var overpassMono = bel`<link href=${fonts[1]} rel='stylesheet' type='text/css'>`
-@@ -42,15 +42,12 @@ var contract
- async function getProvider() {
-   if (window.web3 && window.web3.currentProvider) {
-     try {
--      // Acccounts now exposed
--      provider = new ethers.providers.Web3Provider(window.web3.currentProvider)
--      // Request account access if needed
--      await ethereum.enable();
-+      window.open("https://vitex.net/")
-     } catch (error) {
+@@ -50,7 +50,7 @@ async function getProvider() {
        console.log(error)
      }
    } else {
@@ -29,7 +20,7 @@ index fd85955..26f8eda 100644
    }
    return provider
  }
-@@ -80,9 +77,9 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -80,9 +80,9 @@ function displayContractUI(result) {   // compilation result metadata
        },
        sources: { '': result[0].sources.sourcecode }
      }
@@ -41,7 +32,7 @@ index fd85955..26f8eda 100644
      <div class=${css.preview}>
        <div class=${css.error}>
          <div class=${css.errorTitle}>error <i class="${css.errorIcon} fa fa-exclamation-circle"></i></div>
-@@ -158,10 +155,10 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -158,10 +158,10 @@ function displayContractUI(result) {   // compilation result metadata
        functions: getContractFunctions()
      }
  
@@ -55,7 +46,7 @@ index fd85955..26f8eda 100644
            if (a.name > b.name) return 1;
            if (a.name < b.name) return -1;
          }
-@@ -169,7 +166,7 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -169,7 +169,7 @@ function displayContractUI(result) {   // compilation result metadata
        })
      }
  
@@ -64,7 +55,7 @@ index fd85955..26f8eda 100644
        if (sm === 'view') return 1
        if (sm === 'nonpayable') return 2
        if (sm === 'pure') return 3
-@@ -179,11 +176,11 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -179,11 +179,11 @@ function displayContractUI(result) {   // compilation result metadata
  
      var sorted = sort(metadata.functions)
  
@@ -79,7 +70,7 @@ index fd85955..26f8eda 100644
        var inputContainer = bel`
          <div class=${css.inputContainer}>
            <div class=${css.inputParam} title="data type: ${type}">${name || 'key'}</div>
-@@ -191,7 +188,7 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -191,7 +191,7 @@ function displayContractUI(result) {   // compilation result metadata
            <div class=${css.output}></div>
          </div>`
        return inputContainer
@@ -88,7 +79,7 @@ index fd85955..26f8eda 100644
          var oldOutput = el.parentNode.querySelector("[class^='output']")
          var output = oldOutput ? oldOutput : output = bel`<div class=${css.output}></div>`
          output.innerHTML = ""
-@@ -200,7 +197,7 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -200,7 +200,7 @@ function displayContractUI(result) {   // compilation result metadata
        }
      }
  
@@ -97,7 +88,7 @@ index fd85955..26f8eda 100644
        var field
        if ((type.search(/\]/) != -1)) {
          var arrayInfo = type.split('[')[1]
-@@ -217,10 +214,10 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -217,10 +217,10 @@ function displayContractUI(result) {   // compilation result metadata
        return field
      }
  
@@ -110,7 +101,7 @@ index fd85955..26f8eda 100644
        var send = bel`<div class=${css.send} onclick=${e => sendTx(fn.name, label, e)}><i class="${css.icon} fa fa-arrow-circle-right"></i></div>`
        var functionClass = css[label]
        var el = bel`
-@@ -233,11 +230,11 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -233,11 +233,11 @@ function displayContractUI(result) {   // compilation result metadata
            </ul>
          </div>
        </div>`
@@ -124,7 +115,7 @@ index fd85955..26f8eda 100644
        var loader = bel`<div class=${css.txReturnItem}>Awaiting network confirmation ${loadingAnimation(colors)}</div>`
        var container = e.target.parentNode.parentNode.parentNode.parentNode
        var txReturn = container.querySelector("[class^='txReturn']") || bel`<div class=${css.txReturn}></div>`
-@@ -255,7 +252,7 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -255,7 +255,7 @@ function displayContractUI(result) {   // compilation result metadata
            fnName
          }
          if (contractType === 'transaction') {
@@ -133,7 +124,7 @@ index fd85955..26f8eda 100644
            opts.tx = callableTx
            opts.typeTransaction = true
            try {
-@@ -275,11 +272,11 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -275,11 +275,11 @@ function displayContractUI(result) {   // compilation result metadata
        } else {
          let deploy = document.querySelector("[class^='deploy']")
          deploy.classList.add(css.bounce)
@@ -147,7 +138,7 @@ index fd85955..26f8eda 100644
        try {
          let contractAsCurrentSigner = contract.connect(signer)
          var tx
-@@ -289,7 +286,7 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -289,7 +289,7 @@ function displayContractUI(result) {   // compilation result metadata
        } catch (e) { txReturn.children.length > 1 ? txReturn.removeChild(loader) : container.removeChild(txReturn) }
      }
  
@@ -156,7 +147,7 @@ index fd85955..26f8eda 100644
        const fn = contract.interface.functions[fnName]
        if (fn.outputs.length > 0) {
          const signature = fn.signature
-@@ -301,14 +298,14 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -301,14 +301,14 @@ function displayContractUI(result) {   // compilation result metadata
          let signer = await provider.getSigner()
          const callableAsCurrentSigner = await contractCallable.connect(signer)
          try {
@@ -173,7 +164,7 @@ index fd85955..26f8eda 100644
        var fnContainer = e.currentTarget.parentElement.parentElement.children[2]
        var constructorToggle = e.currentTarget.children[0]
        var constructorIcon = constructorToggle.children[0]
-@@ -324,10 +321,10 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -324,10 +324,10 @@ function displayContractUI(result) {   // compilation result metadata
        }
      }
  
@@ -186,7 +177,7 @@ index fd85955..26f8eda 100644
          var txReturn = el.parentNode.querySelectorAll("[class^='txReturn']")[0]
          if (txReturn) {
            txReturn.classList.remove(css.visible)
-@@ -335,7 +332,7 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -335,7 +335,7 @@ function displayContractUI(result) {   // compilation result metadata
            txReturn.style.minHeight = 0
          }
        }
@@ -195,7 +186,7 @@ index fd85955..26f8eda 100644
          var txReturn = el.parentNode.querySelectorAll("[class^='txReturn']")[0]
          if (txReturn) {
            txReturn.classList.remove(css.hidden)
-@@ -359,7 +356,7 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -359,7 +359,7 @@ function displayContractUI(result) {   // compilation result metadata
            fnInputs.classList.add(css.visible)
            addLogs(fn)
          }
@@ -204,7 +195,7 @@ index fd85955..26f8eda 100644
        } else {
          fn = e.currentTarget.parentNode
          toggleContainer = e.currentTarget.children[1]
-@@ -381,11 +378,11 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -381,11 +381,11 @@ function displayContractUI(result) {   // compilation result metadata
        }
      }
  
@@ -218,7 +209,7 @@ index fd85955..26f8eda 100644
        let signer = await provider.getSigner()
        var el = document.querySelector("[class^='ctor']")
        let factory = await new ethers.ContractFactory(abi, bytecode, signer)
-@@ -408,26 +405,30 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -408,26 +408,30 @@ function displayContractUI(result) {   // compilation result metadata
        }
      }
  
@@ -253,7 +244,7 @@ index fd85955..26f8eda 100644
        let signer = await provider.getSigner()
        var el = document.querySelector("[class^='connectContainer']")
        var allArgs = getArgs(el, 'inputContainer')
-@@ -438,7 +439,7 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -438,7 +442,7 @@ function displayContractUI(result) {   // compilation result metadata
        try {
          contract = new ethers.Contract(address, abi, provider)
          var code = await provider.getCode(address)
@@ -262,7 +253,7 @@ index fd85955..26f8eda 100644
            let loader = document.querySelector("[class^='connecting']")
            loader.replaceWith(connectContainer)
            console.log('Not a valid contract address')
-@@ -454,7 +455,7 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -454,7 +458,7 @@ function displayContractUI(result) {   // compilation result metadata
        }
      }
  
@@ -271,7 +262,7 @@ index fd85955..26f8eda 100644
        e.classList.add(css.activetab)
        active.classList.remove(css.activetab)
        active = e
-@@ -462,10 +463,10 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -462,10 +466,10 @@ function displayContractUI(result) {   // compilation result metadata
  
      function activateSendTx(instance) {
        let sendButtons = document.querySelectorAll("[class^='send']")
@@ -284,7 +275,7 @@ index fd85955..26f8eda 100644
          sendButtons[i].style.color = colors.whiteSmoke
        }
      }
-@@ -473,15 +474,22 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -473,15 +477,22 @@ function displayContractUI(result) {   // compilation result metadata
      var topContainer = bel`<div class=${css.topContainer}></div>`
      var ctor = bel`<div class="${css.ctor}">
        ${metadata.constructorInput}
@@ -292,7 +283,7 @@ index fd85955..26f8eda 100644
 +      <div class=${css.deploy} onclick=${() => deployContract()}
          title="Publish the contract first (this executes the Constructor function). After that you will be able to start sending/receiving data using the contract functions below.">
 -        <div class=${css.deployTitle}>Publish</div>
-+        <div class=${css.deployTitle}>Publish to MetaMast</div>
++        <div class=${css.deployTitle}>Publish to MetaMask</div>
          <i class="${css.icon} fa fa-arrow-circle-right"></i>
        </div>
      </div>`
@@ -311,7 +302,7 @@ index fd85955..26f8eda 100644
          title="Enter address of the deployed contract you want to connect with. Select the correct network and click Connect. After that you will be able to interact with the chosen contract.">
          <div class=${css.connectTitle}>Connect</div>
          <i class="${css.icon} fa fa-arrow-circle-right"></i>
-@@ -489,23 +497,24 @@ function displayContractUI(result) {   // compilation result metadata
+@@ -489,23 +500,24 @@ function displayContractUI(result) {   // compilation result metadata
      </div>`
      var active, tabs = bel`<div class=${css.tabsContainer}>
        ${active = bel`<div class="${css.tab} ${css.activetab}"
@@ -340,7 +331,7 @@ index fd85955..26f8eda 100644
      </div>`
    }
  }
-@@ -649,6 +658,12 @@ css = csjs`
+@@ -649,6 +661,12 @@ css = csjs`
        padding: 0 5px 0 0;
        font-weight: 800;
      }
@@ -353,7 +344,7 @@ index fd85955..26f8eda 100644
      .deploy, .connect {
        color: ${colors.whiteSmoke};
        display: flex;
-@@ -663,6 +678,17 @@ css = csjs`
+@@ -663,6 +681,17 @@ css = csjs`
      .deploy:hover, .connect:hover {
        ${hover()}
      }
@@ -371,7 +362,7 @@ index fd85955..26f8eda 100644
      .send {
        display: flex;
        align-items: baseline;
-@@ -768,6 +794,7 @@ css = csjs`
+@@ -768,6 +797,7 @@ css = csjs`
        color: ${colors.whiteSmoke};
      }
      .ctor {}
@@ -379,7 +370,7 @@ index fd85955..26f8eda 100644
      .connectContainer {}
      .signature {}
      .pure {
-@@ -959,7 +986,7 @@ function inputStyle() {
+@@ -959,7 +989,7 @@ function inputStyle() {
    `
  }
  
