@@ -1,6 +1,6 @@
 const solidityeditor = require('../')
 
-document.title = 'editor-solidity'
+document.title = 'Solidity ++ Editor'
 
 const style = document.createElement('style')
 style.setAttribute('class', 'base')
