@@ -98,28 +98,57 @@ function playeditor (opts = {}, theme = defaultTheme) {
   const id = `/editor/${Object.keys(editors).length}`
   const code = localStorage['source'] || `
 /*
-You can use Play editor with solidity contract or any vite smart contract (still under development).
+You can use the editor with solidity contract or any krc smart contract (still under development).
 
 Paste it in the editor and wait for the preview to start interacting with it.
 
 (Not fully developed__ )
 
-**To interact with the contract you will need a vite wallet or metamask for solidity contract.
+**To interact with the contract you will need metamask for solidity contract.
 */
 
 
 pragma solidity 0.5.12;
+pragma experimental ABIEncoderV2;
 
-contract HelloWorld {
-  uint public data = 123;
+contract Ballot {
+    struct Voter {uint vote;}
+    mapping(address => Voter) public voters;
+    struct Proposal {string name;uint voteCount;}
+    Proposal[] public proposals;
 
-  function set(uint a) external {
-      data = a; 
-  }
+    constructor(string[] memory proposalNames) public {
+        proposals.push(Proposal({name: "not used",voteCount: 0}));
+        for (uint i = 0; i < proposalNames.length; i++) {
+            proposals.push(Proposal({name: proposalNames[i],voteCount: 0}));
+        }
+    }
+    function vote(uint proposal) public {
+        Voter storage sender = voters[msg.sender];
+        require(proposal !=0, "Reserved");
+        require(proposal < proposals.length,"Doesn't exist");
+        require(sender.vote ==0, "Already voted");
+        sender.vote = proposal;
+        proposals[proposal].voteCount++;
+    }
+    function Status() public view returns (uint nrProposals, uint nrVotes) {
+         nrProposals = proposals.length-1;
+         for (uint p = 0; p < proposals.length; p++)
+             nrVotes += proposals[p].voteCount;
+    }
+    function CheckwinningProposal() public view returns (uint winProposal,uint winCount,string memory winName) {
+        for (uint p = 0; p < proposals.length; p++) {
+            if (proposals[p].voteCount > winCount) {
+                winCount = proposals[p].voteCount;
+                winProposal = p;
+            }
+        }
+        winName = proposals[winProposal].name;
+    }
 }
 `
   const ed = {
-    name: opts.name || 'contract.solpp',
+    name: opts.name || 'contract.sol',
     el: codingeditor({
       value: opts.value || code,
       lineNumbers: true,
