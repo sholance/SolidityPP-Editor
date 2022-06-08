@@ -71732,7 +71732,7 @@ async function changeNetworkToKrcTest() {
           decimals: 18
         },
         rpcUrls: ["https://dev.kardiachain.io"],
-        blockExplorerUrls: ["https://explorer.kardiachain.io/"]
+        blockExplorerUrls: ["https://explorer-dev.kardiachain.io/"]
       }]
   });
 }
